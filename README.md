@@ -290,8 +290,6 @@ I want the datasets to allow training and testing of multiple ML classifiers and
 - [ ] Documentation is updated
 - [ ] Code is merged into the main branch
 
----
----
 
 # Project Kanban Board
 
