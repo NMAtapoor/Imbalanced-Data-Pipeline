@@ -27,10 +27,10 @@ def clean_transactions(transactions: pd.DataFrame) -> pd.DataFrame:
 
 
 def remove_missing_values(transactions: pd.DataFrame) -> pd.DataFrame:
-    transactions = transactions.dropna(subset=["transaction_date"])
+    # atapoor: transactions = transactions.dropna(subset=["transaction_date"])
 
     # remove rows with null values in amount from the transaction dataframe
-    transactions = transactions.dropna(subset=["amount"])
+    # atapoor:transactions = transactions.dropna(subset=["amount"])
 
     return transactions
 
@@ -38,21 +38,21 @@ def remove_missing_values(transactions: pd.DataFrame) -> pd.DataFrame:
 def standardise_date_format(transactions: pd.DataFrame) -> pd.DataFrame:
     # Convert all dates into dd/mm/yyyy format - write function to handle the
     # different types of date formats
-    transactions["transaction_date"] = transactions["transaction_date"].apply(
-        standardise_date  # type: ignore
-    )
-    transactions["transaction_date"] = transactions[
-        "transaction_date"
-    ].dt.strftime("%d/%m/%Y")
-    transactions = transactions.dropna(subset=["transaction_date"])
+    #transactions["transaction_date"] = transactions["transaction_date"].apply(
+     #   standardise_date  # type: ignore
+    #)
+    #transactions["transaction_date"] = transactions[
+     #   "transaction_date"
+    #].dt.strftime("%d/%m/%Y")
+    #transactions = transactions.dropna(subset=["transaction_date"])
     return transactions
 
 
 def convert_amount_to_numeric(transactions: pd.DataFrame) -> pd.DataFrame:
     # Convert and drop NaNs in one operation
-    transactions["amount"] = pd.to_numeric(
-        transactions["amount"], errors="coerce"
-    )
-    transactions.dropna(subset=["amount"], inplace=True)
+    #transactions["amount"] = pd.to_numeric(
+     #   transactions["amount"], errors="coerce"
+    #)
+    #transactions.dropna(subset=["amount"], inplace=True)
 
     return transactions

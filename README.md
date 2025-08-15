@@ -103,18 +103,14 @@ I want the datasets to allow training and testing of multiple ML classifiers and
   <summary><b>EPIC 3 – Generating Imbalanced Dataset Versions:</b> </summary>
   
 - User Story 3.1: As a Data Scientist at SavePlanet, I want the ETL pipeline to generate multiple versions of the Abalone dataset with different imbalance rates (e.g., 5%, 10%, 15%, …), so that I can evaluate model performance under varying data distributions.
-
-- User Story 3.2: As a Data Scientist, I want the pipeline to document the imbalance ratio for each generated dataset, so that I know exactly which dataset corresponds to which imbalance scenario.
-
+- User Story 3.2: As a Data Scientist, I want the pipeline to maintain a column such for each dataset version, so that I can track and manage all datasets efficiently.
 
 </details>
 
 <details>
   <summary><b>EPIC 4 – Storing Datasets in a Relational Database:</b> </summary>
   
-- User Story 4.1: As a Data Scientist at SavePlanet, I want each version of the generated dataset to be stored in relational database tables, so that I can easily access them for downstream analysis.
-
-- User Story 4.2: As a Data Scientist, I want the pipeline to maintain metadata for each dataset version in the database (e.g., creation timestamp, imbalance rate), so that I can track and manage all datasets efficiently.
+- User Story 4.1: As a Data Scientist at SavePlanet, I want each version of the generated dataset is merged and to be stored in relational database tables, so that I can easily access them for downstream analysis.
 
 </details>
 
@@ -126,7 +122,6 @@ I want the datasets to allow training and testing of multiple ML classifiers and
 - User Story 5.2: As a Data Scientist, I want to calculate performance metrics such as accuracy, precision, recall, AUC, and Cohen’s Kappa for each model on each dataset, so that I can compare their performance across imbalance rates.
 
 - User Story 5.3: As a Data Scientist, I want to visualize model performance metrics across datasets with varying imbalance rates, so that I can easily interpret the impact of imbalance on model performance.
-
 
 </details>
 ---
@@ -141,7 +136,6 @@ I want the datasets to allow training and testing of multiple ML classifiers and
     - Identify the location and filename of the CSV dataset.
     - Load the CSV file using Pandas or another library.
     - Verify that the file is readable and accessible.
-    - Log extraction success or errors for traceability.
 
 </details>
 
@@ -152,7 +146,6 @@ I want the datasets to allow training and testing of multiple ML classifiers and
     - Check that all expected columns exist in the CSV.
     - Verify data types for each column (numeric, categorical).
     - Handle missing or extra columns appropriately.
-    - Raise warnings or errors if the CSV does not match expectations.
 
 </details>
 
@@ -171,6 +164,7 @@ I want the datasets to allow training and testing of multiple ML classifiers and
 
 <details>
     <summary>User Story 2.2:</summary>
+
 - <b>Tasks:</b>
     - Identify categorical columns.
     - Apply one-hot encoding or label encoding as appropriate.
@@ -203,13 +197,23 @@ I want the datasets to allow training and testing of multiple ML classifiers and
     - Save each dataset version for downstream tasks.
 
 </details>
+<details>
+    <summary>User Story 3.2:</summary>
+
+- <b>Tasks:</b>
+    -	Define the column name and appropriate value
+    -	Add the column to each of the dataset version
+    -	Check each dataset version for new added column
+
+
+</details>
 
 <details>
     <summary>User Story 4.1:</summary>
 
 - <b>Tasks:</b>
     - Design the database schema or table structure to store multiple dataset versions.
-    - Establish connection to the database (e.g., PostgreSQL, MySQL).
+    - Establish connection to the database - e.g., PostgreSQL, MySQL.
     - Write each dataset version into the database table(s).
     - Verify data insertion was successful for each table/version.
     - Ensure datasets are easily accessible for querying and ML training.
@@ -231,9 +235,19 @@ I want the datasets to allow training and testing of multiple ML classifiers and
 
 - <b>Tasks:</b>
     - Compute required performance metrics for each model on each dataset version.
-    - Visualize results using tables or plots (bar charts, line charts, heatmaps).
+    - Visualize results using streamlit.
     - Compare performance across different imbalance rates.
-    - Document insights and recommendations based on observed performance differences.
+</details>
+
+<details>
+    <summary>User Story 5.3:</summary>
+
+- <b>Tasks:</b>
+    -	Install ```streamlit``` library
+    -	Visualize the ML model performance metrics using line char, or bar chart.
+    -	Deploy the ```streamlit``` application 
+
+
 </details>
 
 
@@ -263,9 +277,6 @@ I want the datasets to allow training and testing of multiple ML classifiers and
 </details>
 <details>
     <summary> USER STORY 4.1:</summary>
-</details>
-<details>
-    <summary> USER STORY 4.2:</summary>
 </details>
 <details>
     <summary> USER STORY 5.1:</summary>
@@ -311,17 +322,69 @@ kanban
         (Epic 2 Story 2.2: As a Data Scientist, I want categorical features to be encoded properly, so that ML models can process the data efficiently.)
         (Epic 2 Story 2.3: As a Data Scientist, I want numerical features to be standardized, so that the data is normalized for consistent model training and comparison. )
         (Epic 3 Story 3.1:As a Data Scientist at SavePlanet, I want the ETL pipeline to generate multiple versions of the Abalone dataset with different imbalance rates : e.g., 5%, 10%, 15%, …, so that I can evaluate model performance under varying data distributions. )
-        (Epic 3 Story 3.2: As a Data Scientist, I want the pipeline to document the imbalance ratio for each generated dataset, so that I know exactly which dataset corresponds to which imbalance scenario.)
+        (Epic 3 Story 3.2: As a Data Scientist, I want the pipeline to add a percentage column to each dataset version , so that I know exactly which dataset corresponds to which imbalance scenario after being merged into a single dataframe.)
         (Epic 4 Story 4.1: As a Data Scientist at SavePlanet, I want each version of the generated dataset to be stored in relational database tables, so that I can easily access them for downstream analysis.)
         (Epic 4 Story 4.2: As a Data Scientist, I want the pipeline to maintain metadata for each dataset version in the database e.g., creation timestamp, imbalance rate, so that I can track and manage all datasets efficiently.)
         (Epic 5 Story 5.1: As a Data Scientist at SavePlanet, I want to use each version of the dataset to train and test multiple ML classifiers, so that I can analyze how imbalance affects different model types.)
         (Epic 5 Story 5.2: As a Data Scientist, I want to calculate performance metrics such as accuracy, precision, recall, AUC, and Cohen’s Kappa for each model on each dataset, so that I can compare their performance across imbalance rates.)
         (Epic 5 Story 5.3: As a Data Scientist, I want to visualize model performance metrics across datasets with varying imbalance rates, so that I can easily interpret the impact of imbalance on model performance.)
-    To Do:  
+    To Do:
+ 
+        <span style="color:red; font-weight:bold">EPIC 1 STORY 1.1 TASKS</span> 
         Task 1.1.1: Identify the location and filename of the CSV dataset.
         Task 1.1.2: Load the CSV file using Pandas or another library.
         Task 1.1.3: Verify that the file is readable and accessible.
-        Task 1.1.4: Log extraction success or errors for traceability.
+        <span style="color:red; font-weight:bold">EPIC 1 STORY 1.2 TASKS</span>
+        Task 1.2.1: Check that all expected columns exist in the CSV.
+        Task 1.2.2: Verify data types for each column - numeric, categorical.
+        Task 1.2.3: Handle missing or extra columns appropriately.
+        <span style="color:red; font-weight:bold">EPIC 2 STORY 2.1 TASKS</span>
+        Task 2.1.1: Identify missing, null, or invalid values.
+        Task 2.1.2: Remove rows with critical missing values.
+        Task 2.1.3: Impute missing values for non-critical columns if needed.
+        Task 2.1.4: Remove duplicate records.
+        Task 2.1.5: Log records removed or corrected.
+        <span style="color:red; font-weight:bold">EPIC 2 STORY 2.2 TASKS</span>
+        Task 2.2.1: Identify categorical columns.
+        Task 2.2.2: Apply one-hot encoding or label encoding as appropriate.
+        Task 2.2.3: Verify encoding correctness.
+        Task 2.2.4: Ensure encoded data aligns with model input requirements.
+        <span style="color:red; font-weight:bold">EPIC 2 STORY 2.3 TASKS</span>
+        Task 2.3.1: Identify numerical columns for standardization.
+        Task 2.3.2: Apply Z-score scaling or Min-Max normalization.
+        Task 2.3.3: Validate the standardized values.
+        Task 2.3.4: Ensure transformed data integrates with encoded categorical features.
+        <span style="color:red; font-weight:bold">EPIC 3 STORY 3.1 TASKS</span>
+        Task 3.1.1: Define imbalance rates - 5%, 10%, 15%, … up to 100%.
+        Task 3.1.2: Apply oversampling or undersampling methods to achieve target ratios.
+        Task 3.1.3: Validate the class distribution in each generated dataset.
+        Task 3.1.4: Log the number of records per class for traceability.
+        Task 3.1.5: Save each dataset version for downstream tasks.
+        <span style="color:red; font-weight:bold">EPIC 3 STORY 3.2 TASKS</span>
+        Task 3.2.1: Define the column name and appropriate value
+        Task 3.2.2: Add the column to each of the dataset version
+        Task 3.2.3: Check each dataset version for new added column
+        <span style="color:red; font-weight:bold">EPIC 4 STORY 4.1 TASKS</span>
+        Task 4.1.1: Design the database schema or table structure to store multiple dataset versions.
+        Task 4.1.2: Establish connection to the database - e.g., PostgreSQL.
+        Task 4.1.3: Write each dataset version into the database table.
+        Task 4.1.4: Verify data insertion was successful into the table.
+        Task 4.1.5: Ensure datasets are easily accessible for querying and ML training.
+        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.1 TASKS</span>
+        Task 5.1.1: Split each dataset version into training and testing sets.
+        Task 5.1.2: Select ML classifiers.
+        Task 5.1.3: Train models on the training data.
+        Task 5.1.4: Test models on the test data.
+        Task 5.1.5: Store trained models and predictions for evaluation.
+        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.2 TASKS</span>
+        Task 5.2.1: Compute required performance metrics for each model on each dataset version.
+        Task 5.2.2: Visualize results using streamlit.
+        Task 5.2.3: Compare performance across different imbalance rates.
+        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.3 TASKS</span>
+        Task 5.3.1: Install streamlit library
+        Task 5.3.2: Visualize the ML model performance metrics using line char, or bar chart.
+        Task 5.3.3: Deploy the streamlit application
+    
 
     In Progress:
 
