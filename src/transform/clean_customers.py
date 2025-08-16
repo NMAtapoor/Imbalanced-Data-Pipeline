@@ -2,9 +2,9 @@ import pandas as pd
 from src.utils.file_utils import save_dataframe_to_csv
 
 
-def clean_customers(customers: pd.DataFrame) -> pd.DataFrame:
+def clean_abalone(abalone_df: pd.DataFrame) -> pd.DataFrame:
     # Task 2 - Remove rows with missing values
-    customers = remove_missing_values(customers)
+    abalone = remove_missing_values(abalone_df)
     # Task 3 - Remove the 'age' column
     customers = remove_age_column(customers)
     # Task 4 - Standardise the is_active column

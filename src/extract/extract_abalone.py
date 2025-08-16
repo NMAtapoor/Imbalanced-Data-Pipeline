@@ -11,7 +11,7 @@ FILE_PATH = os.path.join(
     "..",
     "data",
     "raw",
-    "unclean_customers.csv",
+    "unclean_abalone.csv",
 )
 
 # Configure the logger
@@ -19,23 +19,23 @@ logger = setup_logger(__name__, "extract_data.log", level=logging.DEBUG)
 
 EXPECTED_PERFORMANCE = 0.0001
 
-TYPE = "CUSTOMERS from CSV"
+TYPE = "ABALONE from CSV"
 
 
-def extract_customers() -> pd.DataFrame:
+def extract_abalone() -> pd.DataFrame:
     start_time = timeit.default_timer()
 
     try:
-        customers = pd.read_csv(FILE_PATH)
-        extract_customers_execution_time = timeit.default_timer() - start_time
+        abalone_df = pd.read_csv(FILE_PATH)
+        extract_abalone_execution_time = timeit.default_timer() - start_time
         log_extract_success(
             logger,
             TYPE,
-            customers.shape,
-            extract_customers_execution_time,
+            abalone_df.shape,
+            extract_abalone_execution_time,
             EXPECTED_PERFORMANCE,
         )
-        return customers
+        return abalone_df
     except Exception as e:
         logger.setLevel(logging.ERROR)
         logger.error(f"Error loading {FILE_PATH}: {e}")

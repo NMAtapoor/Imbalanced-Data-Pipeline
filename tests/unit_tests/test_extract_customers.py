@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from src.extract.extract_customers import (
+from src.extract.extract_abalone import (
     extract_customers,
     TYPE,
     FILE_PATH,

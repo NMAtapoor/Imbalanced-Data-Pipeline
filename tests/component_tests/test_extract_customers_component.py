@@ -2,8 +2,8 @@ import pandas as pd
 import pytest
 import timeit
 from unittest.mock import patch
-from src.extract.extract_customers import (
-    extract_customers,
+from src.extract.extract_abalone import (
+    extract_abalone,
     EXPECTED_PERFORMANCE,
 )
 
@@ -28,14 +28,14 @@ Component tests differ from unit tests by:
 
 @pytest.fixture
 def expected_unclean_customers():
-    return pd.read_csv("data/raw/unclean_customers.csv")
+    return pd.read_csv("data/raw/unclean_abalone.csv")
 
 
 def test_extract_customers_returns_correct_dataframe(
     expected_unclean_customers,
 ):
     # Call the function to get the DataFrame
-    df = extract_customers()
+    df = extract_abalone()
 
     # Verify the DataFrame is the same as the expected unclean customers
     pd.testing.assert_frame_equal(df, expected_unclean_customers)
@@ -43,11 +43,11 @@ def test_extract_customers_returns_correct_dataframe(
 
 def test_extract_customers_performance():
     execution_time = timeit.timeit(
-        "extract_customers()", globals=globals(), number=1
+        "extract_abalone()", globals=globals(), number=1
     )
 
     # Call the function to get the DataFrame
-    df = extract_customers()
+    df = extract_abalone()
 
     # Load time per row
     actual_execution_time_per_row = execution_time / df.shape[0]
@@ -60,15 +60,15 @@ def test_extract_customers_performance():
     )
 
 
-@patch("src.extract.extract_customers.FILE_PATH", "nonexistent_file.csv")
+@patch("src.extract.extract_abalone.FILE_PATH", "nonexistent_file.csv")
 def test_extract_customers_file_not_found():
     with pytest.raises(Exception, match="Failed to load CSV file"):
-        extract_customers()
+        extract_abalone()
 
 
 def test_extract_customers_corrupt_csv():
-    corrupt_file_path = "tests/test_data/corrupt_customers.csv"
+    corrupt_file_path = "tests/test_data/corrupt_abalone.csv"
 
-    with patch("src.extract.extract_customers.FILE_PATH", corrupt_file_path):
+    with patch("src.extract.extract_abalone.FILE_PATH", corrupt_file_path):
         with pytest.raises(Exception, match="Failed to load CSV file"):
-            extract_customers()
+            extract_abalone()
