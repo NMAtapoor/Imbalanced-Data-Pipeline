@@ -8,8 +8,15 @@ from sklearn.metrics import (
     roc_auc_score, cohen_kappa_score, f1_score, precision_score, recall_score)
 
 def train_svm_model(data_dfs: dict[str, pd.DataFrame]) -> pd.DataFrame:
-    datasets = svm_accuracy = svm_f1 = svm_recall = svm_precision = svm_kappa =[]
-    svm_auc= []
+    metrics = {
+        "Dataset": [],
+        "Accuracy": [],
+        "F1_Score": [],
+        "Precision": [],
+        "Recall": [],
+        "Kappa": [],
+        "AUC": []
+    }
      
     for key, value in data_dfs.items():
         X = value.drop(columns=["Class"])
@@ -20,19 +27,16 @@ def train_svm_model(data_dfs: dict[str, pd.DataFrame]) -> pd.DataFrame:
         svm_model.fit(X_train, y_train)
 
         svm_y_pred = svm_model.predict(X_test)
-        svm_y_prob = svm_model.predict_proba(X_test)[:, 1]  # probability for positive class
-        datasets.append(key)
-        
-        svm_accuracy.append(accuracy_score(y_test, svm_y_pred))
-        svm_auc.append(roc_auc_score(y_test, svm_y_prob))
-        svm_f1.append(f1_score(y_test, svm_y_pred, average='weighted'))
-        svm_precision.append(precision_score(y_test, svm_y_pred, average='weighted'))
-        svm_recall.append(recall_score(y_test, svm_y_pred, average='weighted'))
-        svm_auc.append(roc_auc_score(y_test, svm_y_prob))
-        svm_kappa.append(cohen_kappa_score(y_test, svm_y_pred))
+        svm_y_prob = svm_model.predict_proba(X_test)[:, 1]
+       
+        metrics["Dataset"].append(key)
+        metrics["Accuracy"].append(accuracy_score(y_test, svm_y_pred))
+        metrics["F1_Score"].append(f1_score(y_test, svm_y_pred, average="weighted"))
+        metrics["Precision"].append(precision_score(y_test, svm_y_pred, average="weighted", zero_division=0))
+        metrics["Recall"].append(recall_score(y_test, svm_y_pred, average="weighted"))
+        metrics["Kappa"].append(cohen_kappa_score(y_test, svm_y_pred))
+        metrics["AUC"].append(roc_auc_score(y_test, svm_y_prob))      
     
-    svm_metrics_df =  pd.DataFrame({"name":datasets, "Accuracy": svm_accuracy,
-                                  "F1_Score": svm_f1, "Precision": svm_precision,
-                                  "Recall": svm_recall, "Kappa": svm_kappa, "AUC":svm_auc})
-    print(svm_metrics_df)   
+    svm_metrics_df =  pd.DataFrame(metrics) 
+    #print(svm_metrics_df)
     return svm_metrics_df 

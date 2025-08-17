@@ -7,8 +7,15 @@ from sklearn.metrics import (
     roc_auc_score, cohen_kappa_score, f1_score, precision_score, recall_score)
 
 def train_knn_model(data_dfs: dict[str, pd.DataFrame]) -> pd.DataFrame:
-    datasets = knn_accuracy = knn_f1 = knn_recall = knn_precision = knn_kappa =[]
-    knn_auc= []
+    metrics = {
+        "Dataset": [],
+        "Accuracy": [],
+        "F1_Score": [],
+        "Precision": [],
+        "Recall": [],
+        "Kappa": [],
+        "AUC": []
+    }
     for key, value in data_dfs.items():
         X = value.drop(columns=["Class"])
         y = value["Class"]
@@ -21,15 +28,13 @@ def train_knn_model(data_dfs: dict[str, pd.DataFrame]) -> pd.DataFrame:
         knn_y_pred = knn_model.predict(X_test)
         knn_y_prob = knn_model.predict_proba(X_test)[:, 1] if len(y.unique()) == 2 else None
         
-        knn_accuracy.append(accuracy_score(y_test, knn_y_pred))
-        knn_f1.append(f1_score(y_test, knn_y_pred, average="weighted"))
-        knn_precision.append(precision_score(y_test, knn_y_pred, average="weighted"))
-        knn_recall.append(recall_score(y_test, knn_y_pred, average="weighted"))
-        knn_kappa.append(cohen_kappa_score(y_test, knn_y_pred))
-        knn_auc(roc_auc_score(y_test, knn_y_prob))
-        
-    knn_metrics_df = pd.DataFrame({"name":datasets, "Accuracy": knn_accuracy,
-                                  "F1_Score": knn_f1, "Precision": knn_precision,
-                                  "Recall": knn_recall, "Kappa": knn_kappa, "AUC":knn_auc})
+        metrics["Dataset"].append(key)
+        metrics["Accuracy"].append(accuracy_score(y_test, knn_y_pred))
+        metrics["F1_Score"].append(f1_score(y_test, knn_y_pred, average="weighted"))
+        metrics["Precision"].append(precision_score(y_test, knn_y_pred, average="weighted", zero_division=0))
+        metrics["Recall"].append(recall_score(y_test, knn_y_pred, average="weighted"))
+        metrics["Kappa"].append(cohen_kappa_score(y_test, knn_y_pred))
+        metrics["AUC"].append(roc_auc_score(y_test, knn_y_prob))
+    knn_metrics_df = pd.DataFrame(metrics)
         
     return knn_metrics_df

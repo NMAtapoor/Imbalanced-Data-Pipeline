@@ -11,8 +11,15 @@ from sklearn.metrics import (
 )
 
 def train_randforest_model(data_dfs: dict[str, pd.DataFrame]) -> pd.DataFrame:
-    datasets = rf_accuracy = rf_f1 = rf_recall = rf_precision = rf_kappa =[]
-    rf_auc= []
+    metrics = {
+        "Dataset": [],
+        "Accuracy": [],
+        "F1_Score": [],
+        "Precision": [],
+        "Recall": [],
+        "Kappa": [],
+        "AUC": []
+    }
     for key, value in data_dfs.items():
         X = value.drop(columns=["Class"])
         y = value["Class"]
@@ -26,15 +33,14 @@ def train_randforest_model(data_dfs: dict[str, pd.DataFrame]) -> pd.DataFrame:
         rf_y_pred = rf_model.predict(X_test)
         rf_y_prob = rf_model.predict_proba(X_test)[:, 1] if len(y.unique()) == 2 else None
         
-        rf_accuracy.append(accuracy_score(y_test, rf_y_pred))
-        rf_f1.append(f1_score(y_test, rf_y_pred, average="weighted"))
-        rf_precision.append(precision_score(y_test, rf_y_pred, average="weighted"))
-        rf_recall.append(recall_score(y_test, rf_y_pred, average="weighted"))
-        rf_kappa.append(cohen_kappa_score(y_test, rf_y_pred))
-        rf_auc(roc_auc_score(y_test, rf_y_prob))
-        
-    rf_metrics_df = pd.DataFrame({"name":datasets, "Accuracy": rf_accuracy,
-                                  "F1_Score": rf_f1, "Precision": rf_precision,
-                                  "Recall": rf_recall, "Kappa": rf_kappa, "AUC":rf_auc})
+        metrics["Dataset"].append(key)
+        metrics["Accuracy"].append(round(accuracy_score(y_test, rf_y_pred),3))
+        metrics["F1_Score"].append(f1_score(y_test, rf_y_pred, average="weighted"))
+        metrics["Precision"].append(precision_score(y_test, rf_y_pred, average="weighted", zero_division=0))
+        metrics["Recall"].append(recall_score(y_test, rf_y_pred, average="weighted"))
+        metrics["Kappa"].append(cohen_kappa_score(y_test, rf_y_pred))
+        metrics["AUC"].append(roc_auc_score(y_test, rf_y_prob)) 
+                
+    rf_metrics_df = pd.DataFrame(metrics)
         
     return rf_metrics_df
