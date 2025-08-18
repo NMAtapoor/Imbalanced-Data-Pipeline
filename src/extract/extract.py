@@ -15,7 +15,7 @@ def extract_data() -> pd.DataFrame:
 
         logger.info(
             f"Data extraction completed successfully - "
-            f"Customers: {abalone_df.shape}"
+            f"Abalone: {abalone_df.shape}"
         )
 
         return abalone_df
