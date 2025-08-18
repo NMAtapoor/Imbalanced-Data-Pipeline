@@ -315,7 +315,54 @@ kanban
         (Epic 5 Story 5.2: As a Data Scientist, I want to calculate performance metrics such as accuracy, precision, recall, AUC, and Cohen’s Kappa for each model on each dataset, so that I can compare their performance across imbalance rates.)
         (Epic 5 Story 5.3: As a Data Scientist, I want to visualize model performance metrics across datasets with varying imbalance rates, so that I can easily interpret the impact of imbalance on model performance.)
     To Do:
- 
+        <span style="color:red; font-weight:bold">EPIC 3 STORY 3.2 TASKS</span>
+        Task 3.2.1: Define the column name and appropriate value
+        Task 3.2.2: Add the column to each of the dataset version
+        Task 3.2.3: Check each dataset version for new added column
+        Task 3.2.4: Merge the datasets 
+        Task 3.2.5: Cross check for correctness of merging process
+        <span style="color:red; font-weight:bold">EPIC 4 STORY 4.1 TASKS</span>
+        Task 4.1.1: Design the database schema or table structure to store the merges dataset.
+        Task 4.1.2: Establish connection to the database - e.g., PostgreSQL.
+        Task 4.1.3: Write the merged into the database table.
+        Task 4.1.4: Verify data insertion was successful into the table.
+        Task 4.1.5: Ensure datasets are easily accessible for querying the merged data.
+        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.3 TASKS</span>
+        Task 5.3.3: Deploy the streamlit application
+      
+
+    
+
+    In Progress:
+        <span style="color:red; font-weight:bold">EPIC 3 STORY 3.1 TASKS</span>
+        Task 3.1.4: Save each dataset version into CSV file for downstream tasks.
+        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.1 TASKS</span>
+        Task 5.1.1: Split each dataset version into training and testing sets.
+        Task 5.1.2: Select ML classifiers.
+        Task 5.1.3: Train models on the training data.
+        Task 5.1.4: Test models on the test data.
+        Task 5.1.5: Store trained models and predictions for evaluation.
+        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.2 TASKS</span>
+        Task 5.2.1: Compute required performance metrics for each model on each dataset version.
+        Task 5.2.2: Visualize results using streamlit.
+        Task 5.2.3: Compare performance across different imbalance rates.
+        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.3 TASKS</span>
+        Task 5.3.1: Install streamlit library
+        Task 5.3.2: Visualize the ML model performance metrics using line char, or bar chart.
+    
+
+    Done:
+        <span style="color:red; font-weight:bold">EPIC 1 STORY 1.1 TASKS</span> 
+        Task 1.1.1: Load the CSV file using Pandas or another library.
+        <span style="color:red; font-weight:bold">EPIC 1 STORY 1.2 TASKS</span>
+        Task 1.2.1: Check that all expected columns exist in the CSV.
+        Task 1.2.2: Verify data types for each column - numeric, categorical.
+        Task 1.2.3: Handle missing or extra columns and types appropriately.
+        <span style="color:red; font-weight:bold">EPIC 2 STORY 2.1 TASKS</span>
+        Task 2.1.1: Identify missing, null, or invalid values.
+        Task 2.1.2: Remove rows with critical missing values.
+        Task 2.1.3: Impute missing values for non-critical columns if needed.
+        Task 2.1.4: Check for duplicate and remove duplicate records.
         <span style="color:red; font-weight:bold">EPIC 2 STORY 2.2 TASKS</span>
         Task 2.2.1: Identify categorical columns.
         Task 2.2.2: Apply one-hot encoding or label encoding as appropriate.
@@ -330,52 +377,6 @@ kanban
         Task 3.1.1: Define imbalance rates - 5%, 10%, 15%, … up to 100%.
         Task 3.1.2: Apply oversampling or undersampling methods to achieve target ratios.
         Task 3.1.3: Validate the class distribution in each generated dataset.
-        Task 3.1.4: Save each dataset version into CSF file for downstream tasks.
-        <span style="color:red; font-weight:bold">EPIC 3 STORY 3.2 TASKS</span>
-        Task 3.2.1: Define the column name and appropriate value
-        Task 3.2.2: Add the column to each of the dataset version
-        Task 3.2.3: Check each dataset version for new added column
-        Task 3.2.4: Merge the datasets 
-        Task 3.2.5: Cross check for correctness of merging process
-        <span style="color:red; font-weight:bold">EPIC 4 STORY 4.1 TASKS</span>
-        Task 4.1.1: Design the database schema or table structure to store the merges dataset.
-        Task 4.1.2: Establish connection to the database - e.g., PostgreSQL.
-        Task 4.1.3: Write the merged into the database table.
-        Task 4.1.4: Verify data insertion was successful into the table.
-        Task 4.1.5: Ensure datasets are easily accessible for querying the merged data.
-        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.1 TASKS</span>
-        Task 5.1.1: Split each dataset version into training and testing sets.
-        Task 5.1.2: Select ML classifiers.
-        Task 5.1.3: Train models on the training data.
-        Task 5.1.4: Test models on the test data.
-        Task 5.1.5: Store trained models and predictions for evaluation.
-        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.2 TASKS</span>
-        Task 5.2.1: Compute required performance metrics for each model on each dataset version.
-        Task 5.2.2: Visualize results using streamlit.
-        Task 5.2.3: Compare performance across different imbalance rates.
-        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.3 TASKS</span>
-        Task 5.3.1: Install streamlit library
-        Task 5.3.2: Visualize the ML model performance metrics using line char, or bar chart.
-        Task 5.3.3: Deploy the streamlit application
-      
-
-    
-
-    In Progress:
-        <span style="color:red; font-weight:bold">EPIC 2 STORY 2.1 TASKS</span>
-        Task 2.1.1: Identify missing, null, or invalid values.
-        Task 2.1.2: Remove rows with critical missing values.
-        Task 2.1.3: Impute missing values for non-critical columns if needed.
-        Task 2.1.4: Check for duplicate and remove duplicate records.
-    
-
-    Done:
-        <span style="color:red; font-weight:bold">EPIC 1 STORY 1.1 TASKS</span> 
-        Task 1.1.1: Load the CSV file using Pandas or another library.
-        <span style="color:red; font-weight:bold">EPIC 1 STORY 1.2 TASKS</span>
-        Task 1.2.1: Check that all expected columns exist in the CSV.
-        Task 1.2.2: Verify data types for each column - numeric, categorical.
-        Task 1.2.3: Handle missing or extra columns and types appropriately.
 ```
 
 

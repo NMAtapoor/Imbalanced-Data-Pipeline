@@ -4,6 +4,7 @@ from config.env_config import setup_env
 from src.extract.extract import extract_data
 from src.transform.transform import transform_data
 from src.utils.logging_utils import setup_logger
+from src.load.load_abalone import load_abalone_to_db
 
 # Use LOG_BASE_PATH if set (for testing), otherwise use default
 log_base_path = os.getenv("LOG_BASE_PATH")
@@ -27,6 +28,11 @@ def main():
         logger.info("Beginning the data transformation phase")
         transformed_data = transform_data(extracted_data)
         logger.info("Data transformation phase completed")
+        
+        logger.info("Beginning the data loading phase")
+        load_abalone_to_db(transformed_data)
+        logger.info("Data loading completed")
+        
 
         logger.info(
             f"ETL pipeline completed successfully in {env} environment"
