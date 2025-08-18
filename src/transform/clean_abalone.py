@@ -23,8 +23,7 @@ def clean_abalone(abalone_df: pd.DataFrame) -> pd.DataFrame:
     save_dataframe_to_csv(abalone_df, output_dir, file_name)
 
     return abalone_df
-
-
+    
 #def remove_missing_values(customers: pd.DataFrame) -> pd.DataFrame:
     #return customers.dropna(subset=["country", "is_active"])
 

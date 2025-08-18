@@ -11,7 +11,7 @@ def encode_abalone(data: pd.DataFrame) -> pd.DataFrame:
 
     # Select only 'Sex' column to encode
     encoder = OneHotEncoder(drop=None, sparse_output=False)
-    sex_encoded = encoder.fit_transform(pre[["Sex"]])
+    sex_encoded = encoder.fit_transform(predictors[["Sex"]])
 
     target_encoded = data['Class'].map({'negative': 'N', 'positive': 'P'})
     # Convert to DataFrame with proper column names
