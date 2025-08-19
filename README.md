@@ -315,18 +315,7 @@ kanban
         (Epic 5 Story 5.2: As a Data Scientist, I want to calculate performance metrics such as accuracy, precision, recall, AUC, and Cohen’s Kappa for each model on each dataset, so that I can compare their performance across imbalance rates.)
         (Epic 5 Story 5.3: As a Data Scientist, I want to visualize model performance metrics across datasets with varying imbalance rates, so that I can easily interpret the impact of imbalance on model performance.)
     To Do:
-        <span style="color:red; font-weight:bold">EPIC 3 STORY 3.2 TASKS</span>
-        Task 3.2.1: Define the column name and appropriate value
-        Task 3.2.2: Add the column to each of the dataset version
-        Task 3.2.3: Check each dataset version for new added column
-        Task 3.2.4: Merge the datasets 
-        Task 3.2.5: Cross check for correctness of merging process
-        <span style="color:red; font-weight:bold">EPIC 4 STORY 4.1 TASKS</span>
-        Task 4.1.1: Design the database schema or table structure to store the merges dataset.
-        Task 4.1.2: Establish connection to the database - e.g., PostgreSQL.
-        Task 4.1.3: Write the merged into the database table.
-        Task 4.1.4: Verify data insertion was successful into the table.
-        Task 4.1.5: Ensure datasets are easily accessible for querying the merged data.
+        
         <span style="color:red; font-weight:bold">EPIC 5 STORY 5.3 TASKS</span>
         Task 5.3.3: Deploy the streamlit application
       
@@ -334,8 +323,7 @@ kanban
     
 
     In Progress:
-        <span style="color:red; font-weight:bold">EPIC 3 STORY 3.1 TASKS</span>
-        Task 3.1.4: Save each dataset version into CSV file for downstream tasks.
+        
         <span style="color:red; font-weight:bold">EPIC 5 STORY 5.1 TASKS</span>
         Task 5.1.1: Split each dataset version into training and testing sets.
         Task 5.1.2: Select ML classifiers.
@@ -377,6 +365,20 @@ kanban
         Task 3.1.1: Define imbalance rates - 5%, 10%, 15%, … up to 100%.
         Task 3.1.2: Apply oversampling or undersampling methods to achieve target ratios.
         Task 3.1.3: Validate the class distribution in each generated dataset.
+        Task 3.1.4: Save each dataset version into CSV file for downstream tasks.
+        <span style="color:red; font-weight:bold">EPIC 3 STORY 3.2 TASKS</span>
+        Task 3.2.1: Define the column name and appropriate value
+        Task 3.2.2: Add the column to each of the dataset version
+        Task 3.2.3: Check each dataset version for new added column
+        Task 3.2.4: Merge the datasets 
+        Task 3.2.5: Cross check for correctness of merging process
+       
+        <span style="color:red; font-weight:bold">EPIC 4 STORY 4.1 TASKS</span>
+        Task 4.1.1: Design the database schema or table structure to store the merges dataset.
+        Task 4.1.2: Establish connection to the database - e.g., PostgreSQL.
+        Task 4.1.3: Write the merged into the database table.
+        Task 4.1.4: Verify data insertion was successful into the table.
+        Task 4.1.5: Ensure datasets are easily accessible for querying the merged data.
 ```
 
 
