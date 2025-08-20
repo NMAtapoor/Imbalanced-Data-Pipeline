@@ -7,6 +7,7 @@ from src.transform.standardize_abalone import standardize_data
 from src.transform.resample_abalone import generate_imb_data_version
 from src.transform.add_imbalance_tag import add_tag_to_data_versions
 from src.transform.merge_abalone_data_versions import merge_abalone_df
+from src.load.write_data_to_csv import write_data_versions_to_csv
 
 logger = setup_logger("transform_data", "transform_data.log")
 
@@ -14,11 +15,7 @@ logger = setup_logger("transform_data", "transform_data.log")
 def transform_data(data) -> Tuple[pd.DataFrame, pd.DataFrame]:
     try:
         logger.info("Starting data transformation process...")
-        # Clean transaction data
-       # logger.info("Cleaning transaction data...")
-        #cleaned_transactions = clean_transactions(data[0])
-        #logger.info("Transaction data cleaned successfully.")
-        # Clean customer data
+    
         logger.info("Cleaning Abalone data...")
         cleaned_abalone = clean_abalone(data)
         logger.info("Customer data cleaned successfully.")
@@ -35,6 +32,11 @@ def transform_data(data) -> Tuple[pd.DataFrame, pd.DataFrame]:
         logger.info("Creating Abalone data versions...") 
         abalone_data_versions = generate_imb_data_version(encoded_abalone)
         logger.info("Abalone data versions created successfully.")
+        
+        # used once to write csv versions of data into local machine.
+        #logger.info("Writing dataset versions to csv...")
+        #write_data_versions_to_csv(abalone_data_versions)
+        #logger.info("Data versions writing to csv completed successfully.")
         
         logger.info("Adding IR Column to each data versions...")
         abalone_data_versions_with_tag = add_tag_to_data_versions(abalone_data_versions)

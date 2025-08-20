@@ -13,7 +13,7 @@ def encode_abalone(data: pd.DataFrame) -> pd.DataFrame:
     encoder = OneHotEncoder(drop=None, sparse_output=False)
     sex_encoded = encoder.fit_transform(predictors[["Sex"]])
 
-    target_encoded = data['Class'].map({'negative': 'N', 'positive': 'P'})
+    target_encoded = data['Class'].map({'negative': 0, 'positive': 1})
     # Convert to DataFrame with proper column names
     sex_encoded_df = pd.DataFrame(sex_encoded, columns=encoder.get_feature_names_out(["Sex"]))
 

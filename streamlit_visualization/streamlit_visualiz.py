@@ -4,9 +4,11 @@ from train_svm_model import train_svm_model
 from train_knn_model import train_knn_model
 from train_randforest_model import train_randforest_model
 from read_abalone_csv_files import read_abalone_csv_files
+from train_xgboost_model import train_xbg_model
 import matplotlib.pyplot as plt
 import base64
 import os
+
 #-------------------------------------------------------------------
 
 st.set_page_config(layout="wide")
@@ -158,10 +160,10 @@ def datasets_stats(data_dic: dict[str, pd.DataFrame]):
         #st.success(f"{key}")
         #with col2:
             #minority_count = df["Class"].value_counts().get("P", 0)  # returns 0 if 'P' is missing
-        col2 = df["Class"].value_counts().get("P", 0)
+        col2 = df["Class"].value_counts().get(1, 0)
             #st.success(f"Minority: {minority_count}")
         #with col3:
-        col3 = df["Class"].value_counts().get("N", 0)
+        col3 = df["Class"].value_counts().get(0, 0)
 
             
         #with col4:
@@ -275,6 +277,9 @@ if st.session_state.data_dict is not None:
     if st.sidebar.button("Train RF Model"):
         st.session_state.results_df = train_randforest_model(st.session_state.data_dict)
         st.session_state.model_to_train = "RF"
+    if st.sidebar.button("Train XGBoost Model"):
+        st.session_state.results_df = train_xbg_model(st.session_state.data_dict)
+        st.session_state.model_to_train = "XGBoost"
 
 
 # Main page: Show results
