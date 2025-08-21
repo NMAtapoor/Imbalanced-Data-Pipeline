@@ -1,6 +1,66 @@
 # Imbalanced-Data-Pipeline
-Imbalanced-Data-Pipeline is a capstone project for the Data Engineering training program conducted by Digital Future Academy. The project focuses on extracting, cleaning, transforming, and synthetically generating multiple versions of an imbalanced dataset with varying imbalance rates using oversampling techniques, and loading to database.
+**Imbalanced-Data-Pipeline is a capstone project for the Data Engineering training program conducted by Digital Future Academy. The project focuses on:**
 
+- Extracting, cleaning, and transforming raw datasets.
+- Generating multiple versions of imbalanced datasets with varying imbalance rates using oversampling       techniques.
+- Loading the processed data into a relational database for storage and analysis.
+- Training ML models (K-Nearest Neighbors, Support Vector Machine, Random Forest, XGBoost) and analyzing the effect of imbalance rate on their performance.
+
+# Project Structure:
+```markdown
+Imbalanced-Data-Pipeline/
+│── config/
+│── data/                     # raw, cleaned, and resampled datasets 
+│── notebooks/                # Experiment and EDA
+│── scripts/
+│   └── run_etl.py            # Main entrypoint for ETL
+│── src/
+│   ├── extract/              # Data extraction logic
+│   ├── transform/            # Data cleaning & transformation
+│   ├── load/                 # Database loading
+│── requirements.txt          # Dependencies
+│── README.md                 # Project documentation
+│── .env.dev                  # Environment config
+
+```
+
+# Setup / Installation:
+**1. Clone The Repository:**
+```markdown
+git clone https://github.com/NMAtapoor/Imbalanced-Data-Pipeline.git
+cd Imbalanced-Data-Pipeline
+```
+
+**2. Create and activate a virtual environment:**
+```markdown
+    python -m venv .venv
+    source .venv/bin/activate   # Linux/Mac
+    source .venv\Scripts\activate      # Windows
+```
+**3. Install dependencies:**
+```markdown
+pip install -r requirements.txt
+```
+**4. Configure environment variables:**
+Create a `.env.dev` file in the project root with the following:
+```markdown
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=mydb
+DB_SCHEMA=nysch
+DB_USER=myuser
+DB_PASSWORD=mypassword
+```
+**5. Run the ETL pipeline:**
+```markdown
+run_etl dev
+```
+## Run the Streamlit Application:
+To run the streamlit app, execute the following code on bash script:
+```markdown
+cd streamlit_visualization
+streamlit run streamlit_visualiz.py
+```
 ---
 ---
 ## PROJECT REQUIREMENTS
@@ -290,8 +350,6 @@ I want the datasets to allow training and testing of multiple ML classifiers and
 
 # Project Kanban Board
 
-### Activity 1: Extracting the Data
-
 
 ```mermaid
 kanban
@@ -319,9 +377,6 @@ kanban
         <span style="color:red; font-weight:bold">EPIC 5 STORY 5.3 TASKS</span>
         Task 5.3.3: Deploy the streamlit application
       
-
-    
-
     In Progress:
         
         <span style="color:red; font-weight:bold">EPIC 5 STORY 5.1 TASKS</span>
@@ -380,6 +435,7 @@ kanban
         Task 4.1.4: Verify data insertion was successful into the table.
         Task 4.1.5: Ensure datasets are easily accessible for querying the merged data.
 ```
+
 
 
 
