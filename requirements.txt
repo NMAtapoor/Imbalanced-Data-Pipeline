@@ -23,7 +23,6 @@ gitdb==4.0.12
 GitPython==3.1.45
 greenlet==3.2.4
 idna==3.10
--e git+https://github.com/NMAtapoor/Imbalanced-Data-Pipeline.git@575ecafbd416f4cd9c0911970b0a6b002fdde93d#egg=imbalanced_data_pipeline
 imbalanced-learn==0.14.0
 iniconfig==2.1.0
 ipykernel==6.30.1
