@@ -25,8 +25,7 @@ run_tests = "tests.run_tests:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["imbalanced_data_pipeline"]
-
+include = ["*"]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
