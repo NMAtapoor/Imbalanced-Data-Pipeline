@@ -23,7 +23,6 @@ fonttools==4.59.1
 gitdb==4.0.12
 GitPython==3.1.45
 greenlet==3.2.4
-git+https://github.com/NMAtapoor/Imbalanced-Data-Pipeline.git@5ae14ec712ef1634a6610d4bdd04105ca5a6cdd9#egg=ETL_Project_Walkthough
 idna==3.10
 imbalanced-learn==0.14.0
 iniconfig==2.1.0
