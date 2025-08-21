@@ -16,7 +16,6 @@ cycler==0.12.1
 debugpy==1.8.16
 decorator==5.2.1
 diff_cover==9.6.0
--e git+https://github.com/NMAtapoor/Imbalanced-Data-Pipeline.git@575ecafbd416f4cd9c0911970b0a6b002fdde93d#egg=ETL_Project_Walkthough
 executing==2.2.0
 flake8==7.3.0
 fonttools==4.59.1
