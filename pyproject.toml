@@ -25,14 +25,9 @@ run_tests = "tests.run_tests:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["imbalanced_data_pipeline*"]
+include = ["*"]
 
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
 
-[project]
-dependencies = [
-    "numpy==2.3.2",
-    "pandas==2.3.1",
-    "streamlit==1.48.1",
-    # … include only essential packages for editable install
-]
 
