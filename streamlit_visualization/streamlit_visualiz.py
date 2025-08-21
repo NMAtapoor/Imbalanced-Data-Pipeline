@@ -1,10 +1,14 @@
 import pandas as pd
 import streamlit as st
+
+from read_abalone_csv_files import read_abalone_csv_files
 from train_svm_model import train_svm_model
 from train_knn_model import train_knn_model
 from train_randforest_model import train_randforest_model
-from read_abalone_csv_files import read_abalone_csv_files
 from train_xgboost_model import train_xbg_model
+from draw_metrics_line_chart import visualize_perf_metrics_linechart
+from draw_metrics_bar_chart import visualize_perf_metrics_barchart
+from create_datasets_stats import datasets_stats
 import matplotlib.pyplot as plt
 import base64
 import os
@@ -147,97 +151,6 @@ section[data-testid="stSidebar"] button p {
 
 """, unsafe_allow_html=True)
 
-
-
-#--------------------------------------------------------------------
-
-def datasets_stats(data_dic: dict[str, pd.DataFrame]):
-    #col1, col2, col3, col4 = st.columns(4)
-    data = []
-    for key, df in data_dic.items():
-        #with col1:
-        col1 = key
-        #st.success(f"{key}")
-        #with col2:
-            #minority_count = df["Class"].value_counts().get("P", 0)  # returns 0 if 'P' is missing
-        col2 = df["Class"].value_counts().get(1, 0)
-            #st.success(f"Minority: {minority_count}")
-        #with col3:
-        col3 = df["Class"].value_counts().get(0, 0)
-
-            
-        #with col4:
-        col4 = f"{(round(col2/col3,2)*100)}%"
-        data.append([col1,col2,col3,col4])
-    data_stat_df = pd.DataFrame(data, columns=["Name", "Minority", "Majority", "IR (min/maj)"])
-    return data_stat_df
-
-def visualize_perf_metrics_linechart(metrics, df: pd.DataFrame):
-
-    fig, ax = plt.subplots()
-    ax.plot(df["Dataset"], df[metrics], marker='o', 
-            linestyle='--', color='blue', label= metrics, markersize=3, linewidth=0.5)
-    #ax.set_title(f"{"Accuracy"} per Dataset")
-    ax.set_xlabel("Dataset")
-    ax.set_ylabel(metrics)
-    ax.legend()
-    ax.grid(True)
-    ax.set_xlabel("20 Imbalance Abalone Dataset", fontsize=8)  # X-axis label
-    ax.set_ylabel(metrics, fontsize=8) # Y-axis label
-
-# Tick labels with smaller font
-    ax.tick_params(axis='x', labelsize=5)  # X-axis ticks
-    ax.tick_params(axis='y', labelsize=5)
-    ax.grid(True, color='green', linestyle='--', linewidth=0.1)
-    ax.spines['top'].set_color('yellow')
-    ax.spines['top'].set_linewidth(0.5)
-
-    ax.spines['bottom'].set_color('yellow')
-    ax.spines['bottom'].set_linewidth(0.5)
-
-    ax.spines['left'].set_color('yellow')
-    ax.spines['left'].set_linewidth(0.5)
-
-    ax.spines['right'].set_color('yellow')
-    ax.spines['right'].set_linewidth(0.5)
-    plt.xticks(rotation=90)
-    st.pyplot(fig)
-    #with col2:
-       # st.success("Done")
-    return " "
-def visualize_perf_metrics_barchart(metrics, df: pd.DataFrame):
-    #col1, col2= st.columns(2)
-    #with col1:
-    #st.success("Line Chart of Accuracy")
-    fig, ax = plt.subplots()
-    ax.bar(df["Dataset"], df[metrics], color='#8C9DCF')
-    ax.set_xlabel("Dataset")
-    ax.set_ylabel(metrics)
-    ax.legend()
-    ax.grid(True)
-    ax.set_xlabel("20 Imbalance Abalone Dataset", fontsize=8)  # X-axis label
-    ax.set_ylabel(metrics, fontsize=8) # Y-axis label
-
-# Tick labels with smaller font
-    ax.tick_params(axis='x', labelsize=5)  # X-axis ticks
-    ax.tick_params(axis='y', labelsize=5)
-    ax.grid(True, color='green', linestyle='--', linewidth=0.1)
-    ax.spines['top'].set_color('yellow')
-    ax.spines['top'].set_linewidth(0.5)
-
-    ax.spines['bottom'].set_color('yellow')
-    ax.spines['bottom'].set_linewidth(0.5)
-
-    ax.spines['left'].set_color('yellow')
-    ax.spines['left'].set_linewidth(0.5)
-
-    ax.spines['right'].set_color('yellow')
-    ax.spines['right'].set_linewidth(0.5)
-    plt.xticks(rotation=90)
-    ax.set_ylim(df[metrics].min(), df[metrics].max())
-    st.pyplot(fig)
-    return " "
-
 # Initialize session state
 if "data_dict" not in st.session_state:
     st.session_state.data_dict = None
@@ -257,29 +170,33 @@ folder_path = "../data/data_versions/"  # replace with your folder path
 if st.sidebar.button("Extract Datasets"):
     st.session_state.data_dict = read_abalone_csv_files(folder_path)
     st.session_state.results_df = None  # reset previous results
-    
     st.session_state.data_stat = datasets_stats(st.session_state.data_dict)
     
 
 # Sidebar: Train models (only shown if datasets are loaded)
-if st.session_state.data_dict is not None:
-    #st.sidebar.subheader("Train Models")
-    st.sidebar.write("To Train Model, Click Bellow!")
-    
-    if st.sidebar.button("Train SVM Model"):
-        st.session_state.results_df = train_svm_model(st.session_state.data_dict)
-        st.session_state.model_to_train = "SVM"
-    
-    if st.sidebar.button("Train KNN Model"):
-        st.session_state.results_df = train_knn_model(st.session_state.data_dict)
-        st.session_state.model_to_train = "KNN"
-    
-    if st.sidebar.button("Train RF Model"):
-        st.session_state.results_df = train_randforest_model(st.session_state.data_dict)
-        st.session_state.model_to_train = "RF"
-    if st.sidebar.button("Train XGBoost Model"):
-        st.session_state.results_df = train_xbg_model(st.session_state.data_dict)
-        st.session_state.model_to_train = "XGBoost"
+if st.session_state.data_dict is not None: 
+    # create radio buttons on sidebar for each of the ML algorithms
+    model = st.sidebar.radio(
+    "Choose ML Model To Be Trained:",
+    ["SVM", "KNN", "RF", "XGB"],
+    index=0,
+    key="group1"
+    )       
+    # button on sidebar to train the selected ML model
+    if st.sidebar.button("Train Selected Model"):
+        if model == "SVM":
+            st.session_state.results_df = train_svm_model(st.session_state.data_dict) # call the function for SVM model training
+            st.session_state.model_to_train = "SVM"
+        elif model == "KNN":
+            st.session_state.results_df = train_knn_model(st.session_state.data_dict) # call the function for KNN model training
+            st.session_state.model_to_train = "KNN"
+        elif model == "RF":
+            st.session_state.results_df = train_randforest_model(st.session_state.data_dict) # call the function for RF model training
+            st.session_state.model_to_train = "KNN"
+        elif model == "XGB":
+            st.session_state.results_df = train_xbg_model(st.session_state.data_dict)
+            st.session_state.model_to_train = "XGBoost"
+
 
 
 # Main page: Show results
@@ -306,16 +223,16 @@ if st.session_state.results_df is not None and not st.session_state.results_df.e
 
 if st.session_state.results_df is not None:
     option = st.radio(
-    "Choose Metrics:",
-    ["Accuracy", "F1_Score","Precision","Recall","Kappa","AUC"],
-    index=0,
-    key="model_radio",
-    horizontal=True)
+                "Choose Metrics:",
+                ["Accuracy", "F1_Score","Precision","Recall","Kappa","AUC"],
+                index=0,
+                key="model_radio",
+                horizontal=True)
     col1, col2 = st.columns(2)
     with col1:
-        visualize_perf_metrics_barchart(option, st.session_state.results_df)
+        visualize_perf_metrics_barchart(option,st.session_state.model_to_train, st.session_state.results_df)
     with col2:    
-        visualize_perf_metrics_linechart(option, st.session_state.results_df)
+        visualize_perf_metrics_linechart(option,st.session_state.model_to_train, st.session_state.results_df)
         
 
 else:
