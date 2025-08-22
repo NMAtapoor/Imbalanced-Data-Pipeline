@@ -1,4 +1,13 @@
-# Imbalanced-Data-Pipeline
+## PROJECT REQUIREMENTS
+
+The **SavePlanet**, hereafter referred to as the “Customer,” is an environmental conservation organization that has approached us with a requirement to create multiple datasets with varying imbalance rates from a highly imbalanced Abalone dataset provided in a CSV file. The objective is to enable their Data Scientists to train Machine Learning models and evaluate how different imbalance rates affect the models’ performance metrics.
+The Customer requires a robust ETL pipeline capable of extracting the provided Abalone dataset from the CSV file. The pipeline must efficiently clean, encode, and standardize the data while removing invalid or incomplete records. Furthermore, it should generate multiple versions of the dataset with varying imbalance rates. This will allow the Company’s Data Scientists to train and test various ML classifiers on each dataset version and analyze the impact of imbalance on key performance metrics such as accuracy, precision, recall, AUC, and Cohen’s Kappa.
+Finally, all generated datasets, reflecting different imbalance rates, must be stored in one or more tables in a relational database, ensuring they are easily accessible for downstream analysis and modeling tasks.
+
+---
+---
+
+# Project Title: Imbalanced-Data-Pipeline
 **Imbalanced-Data-Pipeline is a capstone project for the Data Engineering training program conducted by Digital Future Academy. The project focuses on:**
 
 - Extracting, cleaning, and transforming raw datasets.
@@ -6,7 +15,11 @@
 - Loading the processed data into a relational database for storage and analysis.
 - Training ML models (K-Nearest Neighbors, Support Vector Machine, Random Forest, XGBoost) and analyzing the effect of imbalance rate on their performance.
 
+---
+---
+
 # Project Structure:
+
 ```markdown
 Imbalanced-Data-Pipeline/
 │── config/
@@ -17,7 +30,8 @@ Imbalanced-Data-Pipeline/
 │── src/
 │   ├── extract/              # Data extraction logic
 │   ├── transform/            # Data cleaning & transformation
-│   ├── load/                 # Database loading
+│   ├── load/                 # Database loading 
+|── stream_visualization/     # Streamlit app         
 │── requirements.txt          # Dependencies
 │── README.md                 # Project documentation
 │── .env.dev                  # Environment config
@@ -63,21 +77,14 @@ streamlit run streamlit_visualiz.py
 ```
 ---
 ---
-## PROJECT REQUIREMENTS
 
-The **SavePlanet**, hereafter referred to as the “Customer,” is an environmental conservation organization that has approached us with a requirement to create multiple datasets with varying imbalance rates from a highly imbalanced Abalone dataset provided in a CSV file. The objective is to enable their Data Scientists to train Machine Learning models and evaluate how different imbalance rates affect the models’ performance metrics.
-The Customer requires a robust ETL pipeline capable of extracting the provided Abalone dataset from the CSV file. The pipeline must efficiently clean, encode, and standardize the data while removing invalid or incomplete records. Furthermore, it should generate multiple versions of the dataset with varying imbalance rates. This will allow the Company’s Data Scientists to train and test various ML classifiers on each dataset version and analyze the impact of imbalance on key performance metrics such as accuracy, precision, recall, AUC, and Cohen’s Kappa.
-Finally, all generated datasets, reflecting different imbalance rates, must be stored in one or more tables in a relational database, ensuring they are easily accessible for downstream analysis and modeling tasks.
-
-
----
----
+# Project Plan:
 
 ## PROJECT REQUIREMENTS AS AN EPIC
 
 ```text
 
-As the CUSTOMER, I want a robust ETL pipeline that extracts, cleans, encodes, standardizes, and enriches the Abalone dataset from a CSV source, generating multiple versions of the dataset with imbalance rates; So that Data Scientists and Data Analysts can train and evaluate ML models on datasets with varying imbalance levels and assess the impact of imbalance on model performance using the  The processed using an up-to-date imbalanced datasets stored in SQL database.
+As the CUSTOMER, I want a robust ETL pipeline that extracts, cleans, encodes, standardizes, and enriches the Abalone dataset from a CSV source, generating multiple versions of the dataset with imbalance rates; So that Data Scientists and Data Analysts can train and evaluate ML models on datasets with varying imbalance levels and assess the impact of imbalance on model performance using an up-to-date imbalanced datasets stored in SQL database.
 ```
 
 ---
@@ -144,8 +151,6 @@ I want the datasets to allow training and testing of multiple ML classifiers and
   <summary><b>EPIC 1 – Robust Data Extraction:</b> </summary>
   
   - <b>User Story 1.1:</b> As a Data Scientist, I want the ETL pipeline to read the Abalone dataset from a CSV file.
-
-  - User Story 1.2: As a Data Scientist, I want the pipeline to validate the CSV file format before extraction.
   
 </details>
 <details>
@@ -292,7 +297,7 @@ I want the datasets to allow training and testing of multiple ML classifiers and
 
 - <b>Tasks:</b>
     -	Install ```streamlit``` library
-    -	Visualize the ML model performance metrics using line char, or bar chart.
+    -	Visualize the ML model performance metrics using line chart, or bar chart.
     -	Deploy the ```streamlit``` application 
 </details>
 
@@ -300,38 +305,53 @@ I want the datasets to allow training and testing of multiple ML classifiers and
 # USER STORIES ACCEPTANCE CRITERIA: 
 <details>
     <summary> USER STORY 1.1:</summary>
-</details>
 
-<details>
-    <summary> USER STORY 1.2:</summary>
+-  The data from CSV was read successfully into Dataframe.
 </details>
 <details>
     <summary> USER STORY 2.1:</summary>
+
+- Invalid data was removed from the dataset.
 </details>
 
 <details>
     <summary> USER STORY 2.2:</summary>
+
+- Categorical features were encoded through one-hot encoding method
 </details>
 <details>
     <summary> USER STORY 2.3:</summary>
+- The numerical feature were standardized using z-score method.
 </details>
 <details>
     <summary> USER STORY 3.1:</summary>
+
+- The required versions of datasets were generated.
 </details>
 <details>
     <summary> USER STORY 3.2:</summary>
+
+- The IR tag indicating the IR rate of each dataset was added.
 </details>
 <details>
     <summary> USER STORY 4.1:</summary>
+
+- All generated versions were merged into a single DataFrame and loaded into database table.
 </details>
 <details>
     <summary> USER STORY 5.1:</summary>
+
+- All generated versions of dataset were extracted into different Dataframe by the application.
 </details>
 <details>
     <summary> USER STORY 5.2:</summary>
+
+- The selected model were trained and their performance metrics were stored in Dataframe.
 </details>
 <details>
     <summary> USER STORY 5.3:</summary>
+
+- The performance metrics of each ML model have been visualized by the application. 
 </details>
 
 ---
@@ -339,11 +359,11 @@ I want the datasets to allow training and testing of multiple ML classifiers and
 
 ## Definition of Done
 
-- [ ] All subtasks are completed
-- [ ] All tests are passing
-- [ ] Code coverage is at least 80%
+- [ ] All subtasks are completed.
+- [ ] The Pipeline is running successfully.
 - [ ] Code is linted and follows style guidelines
-- [ ] All performance metrics are met
+- [ ] ML models were trained 
+- [ ] ML models performance metrics were visualized.
 - [ ] Documentation is updated
 - [ ] Code is merged into the main branch
 
@@ -374,24 +394,12 @@ kanban
         (Epic 5 Story 5.3: As a Data Scientist, I want to visualize model performance metrics across datasets with varying imbalance rates, so that I can easily interpret the impact of imbalance on model performance.)
     To Do:
         
-        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.3 TASKS</span>
-        Task 5.3.3: Deploy the streamlit application
+       
       
     In Progress:
-        
-        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.1 TASKS</span>
-        Task 5.1.1: Split each dataset version into training and testing sets.
-        Task 5.1.2: Select ML classifiers.
-        Task 5.1.3: Train models on the training data.
-        Task 5.1.4: Test models on the test data.
-        Task 5.1.5: Store trained models and predictions for evaluation.
-        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.2 TASKS</span>
-        Task 5.2.1: Compute required performance metrics for each model on each dataset version.
-        Task 5.2.2: Visualize results using streamlit.
-        Task 5.2.3: Compare performance across different imbalance rates.
         <span style="color:red; font-weight:bold">EPIC 5 STORY 5.3 TASKS</span>
-        Task 5.3.1: Install streamlit library
-        Task 5.3.2: Visualize the ML model performance metrics using line char, or bar chart.
+        Task 5.3.3: Deploy the streamlit application
+        
     
 
     Done:
@@ -427,14 +435,50 @@ kanban
         Task 3.2.3: Check each dataset version for new added column
         Task 3.2.4: Merge the datasets 
         Task 3.2.5: Cross check for correctness of merging process
-       
         <span style="color:red; font-weight:bold">EPIC 4 STORY 4.1 TASKS</span>
         Task 4.1.1: Design the database schema or table structure to store the merges dataset.
         Task 4.1.2: Establish connection to the database - e.g., PostgreSQL.
         Task 4.1.3: Write the merged into the database table.
         Task 4.1.4: Verify data insertion was successful into the table.
         Task 4.1.5: Ensure datasets are easily accessible for querying the merged data.
+        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.1 TASKS</span>
+        Task 5.1.1: Split each dataset version into training and testing sets.
+        Task 5.1.2: Select ML classifiers.
+        Task 5.1.3: Train models on the training data.
+        Task 5.1.4: Test models on the test data.
+        Task 5.1.5: Store trained models and predictions for evaluation.
+        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.2 TASKS</span>
+        Task 5.2.1: Compute required performance metrics for each model on each dataset version.
+        Task 5.2.2: Visualize results using streamlit.
+        Task 5.2.3: Compare performance across different imbalance rates.
+        <span style="color:red; font-weight:bold">EPIC 5 STORY 5.3 TASKS</span>
+        Task 5.3.1: Install streamlit library
+        Task 5.3.2: Visualize the ML model performance metrics using line char, or bar chart.
+
 ```
+---
+---
+
+# Conclusion:
+
+**- Goal 1:** To create a ETL pipeline for clean, transform, standardize, and resample the highly imbalanced dataset of Abalone, which was achieved.
+
+**- Goal 2:** To examine the impact of imbalance data on ML model performance, which was achieved through streamlit app.
+
+**- Challenge:**
+
+- Every thing went well and smoothly, except for streamlit app deployment which still the issue has not been resolve.
+
+**- Lesson Learned:** 
+
+- Defining a clear and concise plan is key for using the time efficiently and accomplishing the project on-time.
+- Divide and Conquer, and improve a feature/functionality through iterative process showed very useful and effective. 
+- No one will be facing into challenge in doing Capstone Project, if the training delivered is followed consistently, and at least 60% of the topics taught are grasped. 
+
+**- Further Development:**
+-  Add functionality to streamlit app to predict the age (young/old) of Abalone, given a number of attributes. 
+- The ETL pipeline and the Streamlit app also can be deployed in AWS using the Serverless (Lambda, Glue, ), and storage S3 bucket or RDS. 
+
 
 
 
