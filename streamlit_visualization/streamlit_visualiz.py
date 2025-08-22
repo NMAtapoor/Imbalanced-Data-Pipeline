@@ -161,7 +161,7 @@ if "model_to_train" not in st.session_state:
 if "data_stat" not in st.session_state:
     st.session_state.data_stat = None
     
-#st.sidebar.image("../data/image/ai_image2.jpeg", width=150 )
+st.sidebar.image("../data/image/Abalone2.jpg", width=200 )
 
 
 st.sidebar.write("Please, Load Data First!")

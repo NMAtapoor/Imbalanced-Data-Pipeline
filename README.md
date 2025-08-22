@@ -476,8 +476,14 @@ kanban
 - No one will be facing into challenge in doing Capstone Project, if the training delivered is followed consistently, and at least 60% of the topics taught are grasped. 
 
 **- Further Development:**
--  Add functionality to streamlit app to predict the age (young/old) of Abalone, given a number of attributes. 
-- The ETL pipeline and the Streamlit app also can be deployed in AWS using the Serverless (Lambda, Glue, ), and storage S3 bucket or RDS. 
+-  Add functionality to streamlit app to predict the age (young/old) of Abalone, given a number of attributes.
+- Include the image recognition feature to recognize and predict the Ablone from image.
+**- AWS Deployment:**
+
+- The ETL pipeline can be deployed on AWS cloud using:
+    - Serverless (Lambda, Glue, Step Function )
+    - Storage: RDS
+    - Streamlit app: EC2, or Docker + EC2 
 
 
 
